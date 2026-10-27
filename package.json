@@ -1,0 +1,10 @@
+{
+  "name": "simple-bundling-v4-pwa",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FINAL Bundle — Simple Bundling v4 static PWA",
+  "scripts": {
+    "test": "node --test tests/engine.test.js"
+  }
+}

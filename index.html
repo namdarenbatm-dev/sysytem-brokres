@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c2540">
+  <meta name="description" content="FINAL Bundle — باندلینگ ساده ورژن ۴؛ تولید خودکار بسته‌های کارتخوان و کش‌لس توسن تکنو">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="FINAL Bundle">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>FINAL Bundle | باندلینگ ساده ورژن ۴</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="logo-frame"><img src="./assets/tosan-techno-logo.png" alt="لوگوی توسن تکنو"></div>
+        <div>
+          <div class="eyebrow">TOSAN TECHNO</div>
+          <h1>FINAL Bundle</h1>
+          <p>باندلینگ ساده <span class="version">ورژن ۴</span></p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="resetBtn" class="button button-secondary" type="button">بازنشانی</button>
+        <button id="csvBtn" class="button button-secondary" type="button">خروجی CSV</button>
+        <button id="printBtn" class="button button-secondary" type="button">چاپ / ذخیره PDF</button>
+        <button id="installBtn" class="button button-primary" type="button" hidden>نصب برنامه</button>
+      </div>
+    </header>
+
+    <nav class="view-tabs" aria-label="انتخاب نما">
+      <button class="tab active" type="button" data-view="managementView" aria-selected="true">نمای مدیریت</button>
+      <button class="tab" type="button" data-view="brokerView" aria-selected="false">نمای شبکه فروش</button>
+    </nav>
+
+    <main>
+      <section id="managementView" class="view active" aria-labelledby="managementTitle">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">CONTROL PANEL</span>
+            <h2 id="managementTitle">پارامترهای تولید بسته</h2>
+            <p>مبالغ را وارد کن و بسته‌های قابل‌اجرا را تولید کن.</p>
+          </div>
+          <div id="modelBadge" class="status-pill neutral"><span class="status-dot"></span><span>در انتظار محاسبه</span></div>
+        </div>
+
+        <form id="bundleForm" class="inputs-panel" novalidate>
+          <div class="input-group">
+            <div class="group-heading"><span class="group-number">۰۱</span><h3>قیمت‌گذاری کارتخوان</h3></div>
+            <div class="fields-grid">
+              <label class="field">
+                <span>قیمت پایه کارتخوان</span>
+                <span class="input-wrap"><input id="posBase" name="posBase" type="number" min="0" step="0.1" value="19" inputmode="decimal" required><span>میلیون تومان</span></span>
+              </label>
+              <label class="field">
+                <span>بودجه بازاریابی هر کارتخوان</span>
+                <span class="input-wrap"><input id="posMarketing" name="posMarketing" type="number" min="0" step="0.1" value="1" inputmode="decimal" required><span>میلیون تومان</span></span>
+                <small>فقط در قیمت قبل از باندل لحاظ می‌شود؛ وارد بودجه باندلینگ نمی‌شود.</small>
+              </label>
+              <label class="field field-emphasis">
+                <span>قیمت رقابتی بازار کارتخوان <b class="required-tag">کف قیمت</b></span>
+                <span class="input-wrap"><input id="marketFloor" name="marketFloor" type="number" min="0" step="0.1" value="15" inputmode="decimal" required><span>میلیون تومان</span></span>
+                <small>قیمت کارتخوان در هیچ بسته‌ای از این مقدار پایین‌تر نمی‌رود.</small>
+              </label>
+            </div>
+            <div class="price-preview"><span>قیمت قبل از باندل کارتخوان</span><strong id="preBundlePreview">۲۰ میلیون تومان</strong><small>قیمت پایه + بودجه بازاریابی</small></div>
+          </div>
+
+          <div class="input-group">
+            <div class="group-heading"><span class="group-number">۰۲</span><h3>اقتصاد کش‌لس</h3></div>
+            <div class="fields-grid">
+              <label class="field">
+                <span>بهای تمام‌شده هر کش‌لس</span>
+                <span class="input-wrap"><input id="cashCost" name="cashCost" type="number" min="0" step="0.1" value="25" inputmode="decimal" required><span>میلیون تومان</span></span>
+              </label>
+              <label class="field">
+                <span>قیمت فروش هر کش‌لس</span>
+                <span class="input-wrap"><input id="cashSale" name="cashSale" type="number" min="0" step="0.1" value="42" inputmode="decimal" required><span>میلیون تومان</span></span>
+              </label>
+              <label class="field">
+                <span>مارک‌آپ هر کش‌لس</span>
+                <span class="input-wrap"><input id="cashMarkup" name="cashMarkup" type="number" min="0" step="0.1" value="2" inputmode="decimal" required><span>میلیون تومان</span></span>
+                <small id="markupPercent">مارک‌آپ معادل ۸٪ بهای تمام‌شده کش‌لس است.</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="group-heading"><span class="group-number">۰۳</span><h3>ترکیب بسته‌ها</h3></div>
+            <div class="fields-grid fields-grid-compact">
+              <label class="field">
+                <span>تعداد کارتخوان در هر بسته</span>
+                <span class="input-wrap"><input id="posCount" name="posCount" type="number" min="1" max="500" step="1" value="5" inputmode="numeric" required><span>دستگاه</span></span>
+              </label>
+              <label class="field">
+                <span>حداکثر تعداد کش‌لس برای تولید</span>
+                <span class="input-wrap"><input id="maxCashCount" name="maxCashCount" type="number" min="1" max="500" step="1" value="5" inputmode="numeric" required><span>عدد</span></span>
+                <small>موتور برای تعدادهای ۱ تا این سقف بسته می‌سازد؛ تعداد کش‌لس از کارتخوان بیشتر نمی‌شود.</small>
+              </label>
+            </div>
+          </div>
+
+          <div id="inputMessage" class="message message-neutral" role="status">بودجه بازاریابی در بودجه باندلینگ وارد نمی‌شود.</div>
+          <div class="form-actions">
+            <button class="button button-primary button-generate" type="submit"><span aria-hidden="true">✦</span> تولید بسته‌ها</button>
+            <span class="local-note"><span class="lock-icon" aria-hidden="true">●</span> محاسبات روی همین دستگاه انجام می‌شود.</span>
+          </div>
+        </form>
+
+        <section class="results-section" aria-labelledby="managementResultsTitle">
+          <div class="results-header">
+            <div><span class="section-kicker">GENERATED BUNDLES</span><h2 id="managementResultsTitle">خروجی موتور باندلینگ</h2></div>
+            <span id="resultCount" class="count-pill">۰ بسته</span>
+          </div>
+          <div id="managementMessage" class="empty-state">
+            <div class="empty-symbol">✦</div>
+            <strong>آماده تولید بسته‌ها</strong>
+            <p>مبالغ و محدودیت تعداد را بررسی کن و «تولید بسته‌ها» را بزن.</p>
+          </div>
+          <div id="managementBundles" class="bundle-list"></div>
+        </section>
+      </section>
+
+      <section id="brokerView" class="view" aria-labelledby="brokerTitle" hidden>
+        <div class="section-heading broker-heading">
+          <div>
+            <span class="section-kicker">SALES NETWORK</span>
+            <h2 id="brokerTitle">بسته‌های قابل ارائه به کارگزار</h2>
+            <p>با خرید کش‌لس بیشتر، قیمت کارتخوان می‌تواند کمتر شود؛ تا کف قیمت رقابتی بازار.</p>
+          </div>
+          <div class="broker-brand-mark">FINAL <span>BUNDLE</span></div>
+        </div>
+        <div id="brokerMessage" class="empty-state">
+          <div class="empty-symbol">◈</div>
+          <strong>هنوز بسته‌ای تولید نشده است</strong>
+          <p>ابتدا در نمای مدیریت ورودی‌ها را ثبت و بسته‌ها را تولید کن.</p>
+          <button class="button button-primary" type="button" data-go-management>رفتن به مدیریت</button>
+        </div>
+        <div id="brokerBundles" class="broker-bundle-list"></div>
+        <p class="broker-footnote">قیمت‌های نمایش‌داده‌شده بر اساس ورودی‌های فعلی محاسبه شده‌اند و فقط در صورت تأیید مدیریت قابل ارائه هستند.</p>
+      </section>
+    </main>
+
+    <footer class="footer"><span>FINAL Bundle · باندلینگ ساده ورژن ۴</span><span>توسن تکنو</span></footer>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
